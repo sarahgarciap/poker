@@ -15,9 +15,17 @@ export function checkHand(hand: PokerHand): number {
     rankCounts.set(card.rank, count + 1);
   }
 
-  const pairCounts = Array.from(rankCounts.values()).filter((count) => count >= 2).length;
+  const rankFrequencies = Array.from(rankCounts.values());
 
-  
+  const hasThreeOfAKind = rankFrequencies.some((count) => count === 3);
+
+  if (hasThreeOfAKind) {
+    
+    return 3;
+  }
+
+  const pairCounts = rankFrequencies.filter((count) => count === 2).length;
+
   if (pairCounts >= 2) {
     return 2;
   }

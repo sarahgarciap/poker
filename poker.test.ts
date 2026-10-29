@@ -26,4 +26,16 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(2);
   });
+
+  it("should give three points for three cards of a kind", () => {
+    const hand = [
+      { rank: 3, suit: "hearts" },
+      { rank: 3, suit: "spades" },
+      { rank: 3, suit: "diamonds" },
+      { rank: 8, suit: "clubs" },
+      { rank: 11, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(3);
+  });
 });
