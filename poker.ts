@@ -28,11 +28,16 @@ export function checkHand(hand: PokerHand): number {
 
   const rankFrequencies = Array.from(rankCounts.values());
   const hasFourOfAKind = rankFrequencies.includes(4);
-  
+
   const isAFullHouse =
     rankFrequencies.includes(3) && rankFrequencies.includes(2);
   const hasThreeOfAKind = rankFrequencies.some((count) => count === 3);
   const isAFlush = hand.every((card) => card.suit === hand[0].suit);
+  const isAStraight = hasStraight(hand.map((card) => card.rank));
+
+  if (isAFlush && isAStraight) {
+    return 80;
+  }
 
   if (hasFourOfAKind) {
     return 60;
@@ -50,7 +55,7 @@ export function checkHand(hand: PokerHand): number {
     return 45;
   }
 
-  if (hasStraight(hand.map((card) => card.rank))) {
+  if (isAStraight) {
     return 40;
   }
 

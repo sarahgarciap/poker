@@ -86,4 +86,16 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(60);
   });
+
+  it("returns eighty points for a straight flush", () => {
+    const hand = [
+      { rank: 5, suit: "hearts" },
+      { rank: 6, suit: "hearts" },
+      { rank: 7, suit: "hearts" },
+      { rank: 8, suit: "hearts" },
+      { rank: 9, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(80);
+  });
 });
