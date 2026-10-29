@@ -50,4 +50,28 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(40);
   });
+
+  it("returns forty-five points for five cards of the exact same suit", () => {
+    const hand = [
+      { rank: 2, suit: "hearts" },
+      { rank: 7, suit: "hearts" },
+      { rank: 9, suit: "hearts" },
+      { rank: 11, suit: "hearts" },
+      { rank: 13, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(45);
+  });
+
+  it("returns fifty points for a full house ;)", () => {
+    const hand = [
+      { rank: 2, suit: "hearts" },
+      { rank: 2, suit: "spades" },
+      { rank: 2, suit: "diamonds" },
+      { rank: 9, suit: "clubs" },
+      { rank: 9, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(50);
+  });
 });

@@ -7,7 +7,7 @@ export interface Card {
 
 export type PokerHand = readonly Card[];
 
-function hasAStraight(ranks: readonly number[]): boolean {
+function hasStraight(ranks: readonly number[]): boolean {
   const sortedRanks = [...ranks].sort((left, right) => left - right);
 
   return (
@@ -18,7 +18,6 @@ function hasAStraight(ranks: readonly number[]): boolean {
   );
 }
 
-
 export function checkHand(hand: PokerHand): number {
   const rankCounts = new Map<number, number>();
 
@@ -28,14 +27,24 @@ export function checkHand(hand: PokerHand): number {
   }
 
   const rankFrequencies = Array.from(rankCounts.values());
+  const isAFullHouse =
+    rankFrequencies.includes(3) && rankFrequencies.includes(2);
   const hasThreeOfAKind = rankFrequencies.some((count) => count === 3);
+  const isAFlush = hand.every((card) => card.suit === hand[0].suit);
 
+  if (isAFullHouse) {
+    return 50;
+  }
 
   if (hasThreeOfAKind) {
     return 30;
   }
 
-  if (hasAStraight(hand.map((card) => card.rank))) {
+  if (isAFlush) {
+    return 45;
+  }
+
+  if (hasStraight(hand.map((card) => card.rank))) {
     return 40;
   }
 
