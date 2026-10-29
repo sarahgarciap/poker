@@ -3,7 +3,7 @@ import { checkHand } from "./poker";
 
 describe("checkHand", () => {
 
-  it("should give one point for a pair", () => {
+  it("returns the highest card within hand if only a pair is present", () => {
     const hand = [
       { rank: 2, suit: "hearts" },
       { rank: 2, suit: "spades" },
@@ -12,10 +12,10 @@ describe("checkHand", () => {
       { rank: 11, suit: "hearts" },
     ] as const;
 
-    expect(checkHand(hand)).toBe(1);
+    expect(checkHand(hand)).toBe(11);
   });
 
-  it("should give two points for the two pairs", () => {
+  it("returns the highest card within hand if two pairs are present", () => {
     const hand = [
       { rank: 2, suit: "hearts" },
       { rank: 2, suit: "spades" },
@@ -24,10 +24,10 @@ describe("checkHand", () => {
       { rank: 11, suit: "hearts" },
     ] as const;
 
-    expect(checkHand(hand)).toBe(2);
+    expect(checkHand(hand)).toBe(11);
   });
 
-  it("should give three points for three cards of a kind", () => {
+  it("returns thirty points for three of a kind within the hand", () => {
     const hand = [
       { rank: 3, suit: "hearts" },
       { rank: 3, suit: "spades" },
@@ -36,6 +36,6 @@ describe("checkHand", () => {
       { rank: 11, suit: "hearts" },
     ] as const;
 
-    expect(checkHand(hand)).toBe(3);
+    expect(checkHand(hand)).toBe(30);
   });
 });

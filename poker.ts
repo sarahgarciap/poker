@@ -16,19 +16,11 @@ export function checkHand(hand: PokerHand): number {
   }
 
   const rankFrequencies = Array.from(rankCounts.values());
-
   const hasThreeOfAKind = rankFrequencies.some((count) => count === 3);
 
   if (hasThreeOfAKind) {
-    
-    return 3;
+    return 30;
   }
 
-  const pairCounts = rankFrequencies.filter((count) => count === 2).length;
-
-  if (pairCounts >= 2) {
-    return 2;
-  }
-
-  return pairCounts === 1 ? 1 : 0;
+  return Math.max(...hand.map((card) => card.rank));
 }
