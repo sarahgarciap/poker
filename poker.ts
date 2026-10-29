@@ -7,6 +7,18 @@ export interface Card {
 
 export type PokerHand = readonly Card[];
 
+function hasAStraight(ranks: readonly number[]): boolean {
+  const sortedRanks = [...ranks].sort((left, right) => left - right);
+
+  return (
+    sortedRanks.length === 5 &&
+    sortedRanks.every(
+      (rank, index) => index === 0 || rank === sortedRanks[index - 1] + 1,
+    )
+  );
+}
+
+
 export function checkHand(hand: PokerHand): number {
   const rankCounts = new Map<number, number>();
 
@@ -18,8 +30,13 @@ export function checkHand(hand: PokerHand): number {
   const rankFrequencies = Array.from(rankCounts.values());
   const hasThreeOfAKind = rankFrequencies.some((count) => count === 3);
 
+
   if (hasThreeOfAKind) {
     return 30;
+  }
+
+  if (hasAStraight(hand.map((card) => card.rank))) {
+    return 40;
   }
 
   return Math.max(...hand.map((card) => card.rank));

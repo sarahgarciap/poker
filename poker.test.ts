@@ -38,4 +38,16 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(30);
   });
+
+  it("returns forty points in total for five ascending cards", () => {
+    const hand = [
+      { rank: 4, suit: "hearts" },
+      { rank: 5, suit: "spades" },
+      { rank: 6, suit: "clubs" },
+      { rank: 7, suit: "diamonds" },
+      { rank: 8, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(40);
+  });
 });
