@@ -61,3 +61,7 @@ export function checkHand(hand: PokerHand): number {
 
   return Math.max(...hand.map((card) => card.rank));
 }
+
+export function calculateTotalScore(hands: readonly PokerHand[]): number {
+  return hands.reduce((total, hand) => total + checkHand(hand), 0);
+}

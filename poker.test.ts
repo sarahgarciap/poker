@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkHand } from "./poker";
+import { calculateTotalScore, checkHand } from "./poker";
 
 describe("checkHand", () => {
 
@@ -98,4 +98,39 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(80);
   });
-});
+
+  it("returns the addition of the scores of 4 hands", () => {
+    const hands = [
+      [
+        { rank: 2, suit: "hearts" },
+        { rank: 2, suit: "spades" },
+        { rank: 2, suit: "diamonds" },
+        { rank: 9, suit: "clubs" },
+        { rank: 9, suit: "hearts" },
+      ],
+      [
+        { rank: 5, suit: "clubs" },
+        { rank: 6, suit: "diamonds" },
+        { rank: 7, suit: "hearts" },
+        { rank: 8, suit: "spades" },
+        { rank: 9, suit: "clubs" },
+      ],
+      [
+        { rank: 2, suit: "hearts" },
+        { rank: 7, suit: "hearts" },
+        { rank: 9, suit: "hearts" },
+        { rank: 11, suit: "hearts" },
+        { rank: 13, suit: "hearts" },
+      ],
+      [
+        { rank: 3, suit: "clubs" },
+        { rank: 8, suit: "diamonds" },
+        { rank: 10, suit: "hearts" },
+        { rank: 12, suit: "spades" },
+        { rank: 13, suit: "clubs" },
+      ],
+    ] as const;
+
+    expect(calculateTotalScore(hands)).toBe(148);
+  });
+}); // desolee jai pas eu le temps de faire les 5 mains (il est 15h13 sorry)
