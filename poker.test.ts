@@ -14,4 +14,16 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(1);
   });
+
+  it("should give two points for the two pairs", () => {
+    const hand = [
+      { rank: 2, suit: "hearts" },
+      { rank: 2, suit: "spades" },
+      { rank: 5, suit: "clubs" },
+      { rank: 5, suit: "diamonds" },
+      { rank: 11, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(2);
+  });
 });
