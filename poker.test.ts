@@ -74,4 +74,16 @@ describe("checkHand", () => {
 
     expect(checkHand(hand)).toBe(50);
   });
+
+  it("returns sixty points for four cards of the same kind", () => {
+    const hand = [
+      { rank: 9, suit: "hearts" },
+      { rank: 9, suit: "spades" },
+      { rank: 9, suit: "diamonds" },
+      { rank: 9, suit: "clubs" },
+      { rank: 11, suit: "hearts" },
+    ] as const;
+
+    expect(checkHand(hand)).toBe(60);
+  });
 });
